@@ -96,7 +96,7 @@ router.delete("/offer/delete", isAuthenticated, async (req, res) => {
   }
 });
 
-router.get("/offer", async (req, res) => {
+router.get("/offers", async (req, res) => {
   try {
     // Title, priceMin et priceMax
     const filters = {};
@@ -141,7 +141,10 @@ router.get("/offer", async (req, res) => {
       .limit(limit)
       .populate("owner", "account");
     // .select("product_name product_price"); // pour une meilleure lisibilité
-    res.status(200).json(offers);
+
+    const count = await Offer.countDocuments(filters);
+
+    res.status(200).json({ count: count, offers: offers });
   } catch (error) {
     res.status(400).json({ message: error.message });
   }
