@@ -96,7 +96,7 @@ router.delete("/offer/delete", isAuthenticated, async (req, res) => {
   }
 });
 
-router.get("/offers", async (req, res) => {
+router.get("/offer", async (req, res) => {
   try {
     // Title, priceMin et priceMax
     const filters = {};
