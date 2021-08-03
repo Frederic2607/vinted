@@ -139,8 +139,10 @@ router.get("/offers", async (req, res) => {
       .sort(sort)
       .skip((page - 1) * limit)
       .limit(limit)
-      .populate("owner", "account");
-    // .select("product_name product_price"); // pour une meilleure lisibilité
+      .select(
+        "product_details product_name product_desciption product_price product_image owner"
+      );
+    // .populate("owner", "account");
 
     const count = await Offer.countDocuments(filters);
 
