@@ -154,10 +154,11 @@ router.get("/offers", async (req, res) => {
 
 router.get("/offer/:id", async (req, res) => {
   try {
-    const offers = await Offer.findById(req.params.id).populate(
-      "owner",
-      "account"
-    );
+    const offers = await Offer.findById(req.params.id)
+      .populate("owner", "account")
+      .select(
+        "product_details product_name product_desciption product_price product_image owner"
+      );
     res.status(200).json({ offers });
   } catch (error) {
     res.status(400).json({ message: error.message });
