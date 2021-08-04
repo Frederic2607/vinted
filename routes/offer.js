@@ -141,8 +141,8 @@ router.get("/offers", async (req, res) => {
       .limit(limit)
       .select(
         "product_details product_name product_desciption product_price product_image owner"
-      );
-    // .populate("owner", "account");
+      )
+      .populate("owner", "account");
 
     const count = await Offer.countDocuments(filters);
 
