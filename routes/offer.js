@@ -159,7 +159,7 @@ router.get("/offer/:id", async (req, res) => {
       .select(
         "product_details product_name product_desciption product_price product_image owner"
       );
-    res.status(200).json({ offer });
+    res.status(200).json(offer);
   } catch (error) {
     res.status(400).json({ message: error.message });
   }
