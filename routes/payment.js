@@ -1,10 +1,11 @@
 const express = require("express");
-const formidable = require("express-formidable");
 const router = express.Router();
+require("dotenv").config();
 const isAuthenticated = require("../middlewares/isAuthenticated");
-const stripe = require("stripe")(
-  "sk_test_51JLodcFTc2lW5LhwN3UXU466ouanDJSoRTFpFb3rbepL584zXyzUpoMR9pQiTO1EP0dilXDnwc65xW9mC7DOQxqv00dvx9XHkV"
-);
+const stripe = require("stripe")(process.env.STRIPE_SECRET);
+const cors = require("cors");
+
+app.use(cors());
 
 router.post("/payment", isAuthenticated, async (req, res) => {
   try {
