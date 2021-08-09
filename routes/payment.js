@@ -1,9 +1,10 @@
 const express = require("express");
 const formidable = require("express-formidable");
 const router = express.Router();
+const isAuthenticated = require("../middlewares/isAuthenticated");
 const stripe = require("stripe")(process.env.STRIPE_SECRET);
 
-router.post("/payment", async (req, res) => {
+router.post("/payment", isAuthenticated, async (req, res) => {
   try {
     const stripeToken = req.fields.stripeToken;
 
