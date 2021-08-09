@@ -5,6 +5,7 @@ const isAuthenticated = require("../middlewares/isAuthenticated");
 const stripe = require("stripe")(process.env.STRIPE_SECRET);
 const cors = require("cors");
 
+const app = express();
 app.use(cors());
 
 router.post("/payment", isAuthenticated, async (req, res) => {
