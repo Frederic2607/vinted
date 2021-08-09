@@ -5,9 +5,15 @@ const cloudinary = require("cloudinary").v2;
 const cors = require("cors");
 require("dotenv").config();
 
+const corsOptions = {
+  origin: [`https://react-vinted.netlify.app`],
+  credentials: true,
+  // methods: ["GET", "POST", "OPTIONS", "PUT", "DELETE"],
+};
+
 const app = express();
 app.use(formidable());
-app.use(cors());
+app.use(cors(corsOptions));
 
 mongoose.connect(process.env.MONGODB_URI, {
   useNewUrlParser: true,
