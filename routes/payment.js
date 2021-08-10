@@ -4,7 +4,7 @@ require("dotenv").config();
 const isAuthenticated = require("../middlewares/isAuthenticated");
 const stripe = require("stripe")(process.env.STRIPE_SECRET);
 
-router.post("/payment", isAuthenticated, async (req, res) => {
+router.post("/payment", async (req, res) => {
   try {
     const stripeToken = req.fields.stripeToken;
     console.log(stripeToken);
