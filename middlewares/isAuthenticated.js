@@ -24,14 +24,37 @@
 
 const User = require("../models/User");
 
+// const isAuthenticated = async (req, res, next) => {
+//   const token = req.headers.authorization.replace("Bearer ", "");
+//   const user = await User.findOne({ token: token }).select("_id account token");
+//   if (user) {
+//     req.user = user;
+//     return next();
+//   } else {
+//     return res.status(401).json({ message: "Unauthorized" });
+//   }
+// };
+
 const isAuthenticated = async (req, res, next) => {
-  const token = req.headers.authorization.replace("Bearer ", "");
-  const user = await User.findOne({ token: token }).select("_id account token");
-  if (user) {
-    req.user = user;
-    return next();
+  if (req.headers.authorization) {
+    const token = req.headers.authorization.replace("Bearer ", "");
+
+    const user = await User.findOne({ token: token }).select(
+      "_id account token"
+    );
+
+    if (user) {
+      req.user = user;
+      next();
+    } else {
+      return res.status(401).json({
+        message: "Unauthorized",
+      });
+    }
   } else {
-    return res.status(401).json({ message: "Unauthorized" });
+    return res.status(401).json({
+      message: "Unauthorized",
+    });
   }
 };
 
